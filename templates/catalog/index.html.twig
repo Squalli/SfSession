@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <h1>Créer une formation</h1>
+    {{ form_start(form, { attr : { class : 'form'}}) }}
+        <p class="">
+            {{ form_label(form.title) }} 
+            {{ form_widget(form.title) }}
+        </p>
+        <p class="form___rangeRow">
+            {{ form_label(form.level) }}
+            {{ form_widget(form.level) }}
+            <span>BAC+2</span>
+        </p>
+        <p>
+            <h3>
+                Modules de la formation 
+                <button type="button"
+                class="add-another-collection-widget"
+                data-list-selector="#programmes-fields-list">Associer un module</button>
+            </h3>
+        </p>
+        {# store the prototype on the data-prototype attribute #}
+        <section id="programmes-fields-list" class="form-row"
+            data-prototype="{{ form_widget(form.programmes.vars.prototype)|e }}"
+            data-widget-counter="{{ form.programmes|length }}">
+            {% for programme in form.programmes %}
+                
+                {{ form_errors(programme) }}
+                {{ form_widget(programme) }}
+
+            {% endfor %}
+        </section>
+        <p class="form__validRow">
+            <input type="submit" value="Valider">
+        </p>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const level = document.querySelector("#formation_level")
+            level.addEventListener("input", () => {
+                let legend = "BAC+"+level.value
+                level.parentNode.querySelector("span").innerText = legend
+            })
+
+            const button = document.querySelector('.add-another-collection-widget')
+
+            //on créé un élémént DOM button
+            var removeBtn = document.createElement("button")
+            //on lui ajoute la classe .remove-question et du texte ("Supprimer")
+            removeBtn.classList.add("removeBtn")
+            removeBtn.innerHTML = "&times;"
+
+            button.addEventListener("click", function (e) {
+                //on récupère l'id de la liste des questions stocké dans l'attribute data-list-selector du button 
+                var listId = button.getAttribute('data-list-selector')
+                //on récupère l'élément du DOM correspondant à cette id
+                var list = document.querySelector(listId)
+                //le compteur de questions c'est soit la valeur de l'attr data-widget-counter, soit le nombre de questions
+                //déjà présentes dans la liste (en cas d'edit)
+                var counter = list.dataset.widgetCounter || list.querySelectorAll(listId+">*").length
+                
+                // on récupère le HTML d'un form de question complet (data-prototype)
+                var newWidget = list.getAttribute('data-prototype')
+                // on remplace toute occurence de __name__ par un numéro unique, correspondant au compteur de
+                // questions de la liste
+                newWidget = newWidget.replace(/__name__/g, counter)
+                //on incrémente le compteur (vu qu'on vient d'ajouter une question)
+                counter++
+                //et on met à jour la valeur de l'attribute data-widget-counter
+                list.dataset.widgetCounter = counter
+
+                // on créé un nouvel élément DOM (une div ici)
+                var newElem = document.createElement("div")
+                newElem.classList.add("flex-form")
+                //on remplit cet élément avec tout le HTML d'un formulaire de question (data-prototype)
+                newElem.innerHTML = newWidget
+
+                //on ajoute ce bouton en tant qu'enfant du formulaire de question
+                newElem.appendChild(removeBtn.cloneNode(true))
+                
+                //niveau DOM, on ajoute ce nouvel élément dans la liste
+                list.appendChild(newElem)
+                
+            });
+
+            //pour cibler les boutons supprimer, on récupère la liste complète
+            var wrapper = document.querySelector('#programmes-fields-list')
+
+            var programmes = document.querySelectorAll("#programmes-fields-list>*")
+            programmes.forEach(question => {
+                programme.appendChild(removeBtn.cloneNode(true))
+            });
+
+            //lorsqu'un clic survient dans la zone de la liste des questions
+            wrapper.addEventListener('click', function(e) {
+                e.preventDefault()
+                //on vérifie que la cible du clic est un bouton ayant la classe "remove-question"
+                if(e.target.classList.contains("removeBtn")){
+                    //on supprime l'élément parent de la cible du clic
+                    e.target.parentNode.remove()
+                }
+            })
+        })
+        
+    </script>
+{% endblock %}
