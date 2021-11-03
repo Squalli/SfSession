@@ -1,0 +1,27 @@
+{% extends "catalog/formation/base.html.twig" %}
+
+{% block body %}
+    <h1>LISTE DES FORMATIONS</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>TITRE</th>
+                <th>NIVEAU D'ETUDES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for formation in formations %}
+            <tr>
+                <td>{{ formation.id }}</td>
+                <td>
+                    <a href="{{ path('formation_show', { id : formation.id }) }}">
+                        {{ formation.title }}
+                    </a>
+                </td>
+                <td>BAC+{{ formation.level }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

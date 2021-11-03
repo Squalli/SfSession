@@ -1,10 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&display=swap');
+
 *{
     box-sizing: border-box;
 }
+body{
+    margin: 0;
+    position: relative;
+}
+body, button{
+    font-family: 'Oxygen', sans-serif;
+}
+a{
+    color: inherit; 
+    text-decoration: none;
+}
+
+nav#main-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    background-color:rgb(58, 101, 141);
+    color: white;
+    position: sticky;
+    top: 0;
+    border-bottom: 4px solid rgb(122, 180, 197);
+}
+nav#sub-menu ul{
+    border-top: 4px solid rgb(122, 180, 197);
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    background: rgb(122, 180, 197);
+}
+nav#sub-menu ul li{
+    padding: 0.5em 1em;
+    display: inline-block;
+    margin-right: 0.5em;
+    border-radius: 4px 4px 0 0;
+    color: #fff;
+}
+nav#sub-menu ul li.active{
+    background: #fff;
+    color: #000;
+}
+
+#page-wrapper{
+    min-height: 100vh;
+    position: relative;
+}
+#body-wrapper{
+    max-width: 1200px;
+    margin: auto;
+    padding: 1em;
+}
+
+h1{
+    text-transform: uppercase;
+    color: rgb(58, 101, 141);
+}
+
+.nav-logo{
+    margin-right: 1em;
+}
+.nav-logo img{
+    height: 4em;
+}
+.nav-left, .nav-right{
+    flex: 1;
+}
+.nav-right{
+    text-align: right;
+}
+.nav-link{
+    display: inline-block;
+    padding: 1em 0;
+    text-align: center;
+}
+.nav-left .nav-link{
+    margin-right: 1em;
+}
+.nav-right .nav-link{
+    margin-left: 1em;
+}  
+
+.nav-link.active{
+    font-weight: bold;
+    position: relative;
+}
+.nav-link.active::after{
+    display: block;
+    content: "\25BE";
+    position: absolute;
+    width: 100%;
+    bottom: -0.5em;
+    left: 0;
+    font-size: 2em;
+    text-align: center;
+    color: #fff;
+}
+
 .form{
     max-width: 75vw;
     margin: auto;
 }
+.form__row2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 1em;
+}
+.form__radio-group{
+    display: flex;
+    align-items: center;
+    padding: 0.5em 1em 0;
+}
+
 .flex-form{
     padding: 0 0 1em 4em;
     position: relative;
@@ -33,27 +143,83 @@
     }
 }
 .form label, 
-.form input[type='text'],
-.form input[type='number'],
+.form input[type='text'], .form input[type='number'], .form input[type='email'], .form input[type='password'],
 .form select{
     padding: 0.5em 0.2em;
     display: block;
     width: 100%;
     height: 2.5em;
 }
+.form input[type='range']{
+    margin: 0;
+}
+.form input[type='range']::-webkit-slider-thumb {
+    margin-top: 0px;
+    width: 32px;
+    height: 32px;
+    background: #3071a9;
+    border: 1.9px solid rgba(0, 30, 0, 0.57);
+    border-radius: 4px;
+    cursor: pointer;
+    -webkit-appearance: none;
+}
+.form input[type='range']::-ms-thumb {
+    width: 32px;
+    height: 32px;
+    background: #3071a9;
+    border: 1.9px solid rgba(0, 30, 0, 0.57);
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 0px;
+    /*Needed to keep the Edge thumb centred*/
+}
+
 .form label{
     text-transform: uppercase;
     font-size: 0.7em;
     height: auto;
-    
+}
+.form__radio-group input{
+    margin: -0.2em 0.5em 0 0;
+}
+.form__radio-group label{
+    font-size: 0.8em;
 }
 .form__rangeRow{
     display: flex;
     align-items: center;
 }
-.form__rangeRow input{
-    
-}
+
 .form__validRow{
     text-align: center;
+}
+
+.form-btn{
+    padding: 0.5em 0.8em;
+    text-transform: uppercase;
+    color: #fff;
+    background-color: rgb(119, 154, 187);
+    border: none;
+}
+.form-btn:hover, .form-btn:focus{
+    background-color: rgb(58, 101, 141);
+    cursor: pointer;
+}
+
+#welcome-logo{
+    margin: auto;
+    width: 15vw;
+    padding-top: 3em;
+}
+#welcome-logo img{
+    width: 100%;
+    filter: drop-shadow(10px 8px 15px rgb(58, 101, 141));
+}
+
+.logout-link::before{
+    font-weight: 900;
+    font-size: 1em;
+    display: inline-block;
+    font-family: "Font Awesome 5 Free";
+    content: "\f2f5";
 }

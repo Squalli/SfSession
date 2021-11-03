@@ -1,6 +1,6 @@
-{% extends 'base.html.twig' %}
+{% extends 'catalog/formation/base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Ajouter une formation{% endblock %}
 
 {% block body %}
     <h1>Créer une formation</h1>
@@ -34,7 +34,7 @@
             {% endfor %}
         </section>
         <p class="form__validRow">
-            <input type="submit" value="Valider">
+            <button class="form-btn" type="submit">Valider</button>
         </p>
     {{ form_end(form) }}
 {% endblock %}
@@ -53,7 +53,7 @@
 
             //on créé un élémént DOM button
             var removeBtn = document.createElement("button")
-            //on lui ajoute la classe .remove-question et du texte ("Supprimer")
+            //on lui ajoute la classe .removeBtn et du texte ("×")
             removeBtn.classList.add("removeBtn")
             removeBtn.innerHTML = "&times;"
 

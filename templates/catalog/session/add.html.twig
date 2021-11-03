@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <h1>Ajouter une session</h1>
+    {{ form_start(form, { attr : { class : 'form'}}) }}
+        <div class="form__row2">
+            <p class="">    
+                {{ form_label(form.startDate)}}
+                {{ form_widget(form.startDate)}}
+            </p>
+            <p class="">    
+                {{ form_label(form.endDate)}}
+                {{ form_widget(form.endDate)}}
+            </p>
+        </div>
+        <div>
+            {{ form_label(form.formation) }}
+            {% for formation in form.formation %}
+                <div class="form__radio-group">
+                    {{ form_widget(formation) }}
+                    {{ form_label(formation) }}
+                </div>
+            {% endfor %}
+        </div>
+        
+        
+        <p class="form__validRow">
+            <button class="form-btn" type="submit">Valider</button>
+        </p>
+    {{ form_end(form)}}
+{% endblock %}

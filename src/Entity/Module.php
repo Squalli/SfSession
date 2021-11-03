@@ -29,6 +29,11 @@ class Module
      */
     private $programmes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="modules")
+     */
+    private $category;
+
     public function __construct()
     {
         $this->programmes = new ArrayCollection();
@@ -77,6 +82,18 @@ class Module
                 $programme->setModule(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

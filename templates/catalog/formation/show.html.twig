@@ -1,0 +1,23 @@
+{% extends "catalog/formation/base.html.twig" %}
+
+{% block body %}
+
+    <h1>{{ formation.title }}</h1>
+
+    <p>Niveau BAC + {{ formation.level }}</p>
+
+    <h3>Programme de la formation</h3>
+    <ul>
+        {% set totalDuration = 0 %}
+        {% for category, modulesProg in programme %}
+            <li>{{ category }}</li>
+            <ul>
+                {% for moduleProg in modulesProg %}
+                    {% set totalDuration = totalDuration + moduleProg.duration %}
+                    <li>{{ moduleProg.module.name }} - <small>{{ moduleProg.duration }}h</small></li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    </ul>
+    <p>Durée totale de la formation : {{ totalDuration }}h</p>
+{% endblock %}

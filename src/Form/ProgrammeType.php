@@ -15,12 +15,11 @@ class ProgrammeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            
             ->add('module', EntityType::class, [
-                'class' => Module::class,
+                'class'        => Module::class,
                 'choice_label' => 'name',
-                'label' => 'Module à associer',
-                'placeholder' => "Choisir..."
+                'label'        => 'Module à associer',
+                'placeholder'  => 'Choisir...'
             ])
             ->add('duration', IntegerType::class, [
                 'label' => 'Durée (en heures)'
