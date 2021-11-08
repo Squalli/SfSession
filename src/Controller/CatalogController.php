@@ -19,8 +19,26 @@ class CatalogController extends AbstractController
      */
     public function listFormations(){
 
+        $formations = $this->getDoctrine()->getRepository(Formation::class)->findAll();
+
+        $listformations = [];
+        
+        foreach($formations as $formation){
+             
+            $programmeComplet = [];
+            
+            foreach($formation->getProgrammes() as $prog){
+                $cat = $prog->getModule()->getCategory()->getTitle();
+                if(!array_key_exists($cat, $programmeComplet)){
+                    $programmeComplet[$cat] = [];
+                }
+                $programmeComplet[$cat][] = $prog;
+            }
+            $listformations[] = ["formation" => $formation, "programme" => $programmeComplet];
+        }
+        
         return $this->render("catalog/formation/list.html.twig", [
-            "formations" => $this->getDoctrine()->getRepository(Formation::class)->findAll()
+            "listformations" => $listformations
         ]);
     }
 
@@ -66,7 +84,7 @@ class CatalogController extends AbstractController
             return $this->redirectToRoute("formation_list");
         }
 
-        return $this->render('catalog/formation/index.html.twig', [
+        return $this->render('catalog/formation/add.html.twig', [
             "form" => $form->createView()
         ]);
     }

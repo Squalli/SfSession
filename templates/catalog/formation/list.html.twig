@@ -1,27 +1,68 @@
-{% extends "catalog/formation/base.html.twig" %}
+{% extends "catalog/base.html.twig" %}
 
 {% block body %}
     <h1>LISTE DES FORMATIONS</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>TITRE</th>
-                <th>NIVEAU D'ETUDES</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for formation in formations %}
-            <tr>
-                <td>{{ formation.id }}</td>
-                <td>
-                    <a href="{{ path('formation_show', { id : formation.id }) }}">
-                        {{ formation.title }}
-                    </a>
-                </td>
-                <td>BAC+{{ formation.level }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    <section class="list">
+        
+        {% for data in listformations %}
+            {% set formation = data['formation'] %}
+            {% set programme = data['programme'] %}
+            <div class="listRow">
+                <div class="listRow__title" onclick="showListDetails(this)">
+                    <h4>
+                        {{ formation.title }}&nbsp;<i class="fas fa-caret-down"></i><br>
+                        <small>BAC{{ formation.level > 0 ? "+" ~ formation.level : "" }}</small>
+                    </h4>
+                    <div class="listRow__actions">
+                        <a href="{{ path('formation_show', { id : formation.id }) }}">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="{{ path('formation_show', { id : formation.id }) }}">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        <a href="{{ path('formation_show', { id : formation.id }) }}">
+                            <i class="fas fa-trash"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="listRow__details">
+                    <ul>
+                    {% for category, modulesProg in programme %}
+                        <li>{{ category }}</li>
+                        <ul>
+                            {% for moduleProg in modulesProg %}
+                                <li>{{ moduleProg.module.name }} - <small>{{ moduleProg.duration }}h</small></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <li>Pas de programme...</li>
+                    {% endfor %}
+                    </ul>
+                </div> 
+            </div>
+        {% endfor %}
+       
+    </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+          
+        function showListDetails(title){
+            const otherDetails = document.querySelectorAll(".listRow__details")
+            const details = title.nextElementSibling
+            otherDetails.forEach(d => {
+                if(details !== d){
+                    d.classList.remove("show")
+                }
+            })
+            
+            details.classList.toggle("show")
+
+            title.querySelector("i").classList.replace("fa-caret-down", "fa-caret-up")
+            
+        }
+        
+    </script>
 {% endblock %}

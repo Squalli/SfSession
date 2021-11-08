@@ -7,11 +7,14 @@
                 
                 <div class="nav-left">
                     {% if app.user %}
-                        <a class="nav-link {{ match('formation', app.request.uri) ? "active" : ""  }}" href="{{ path('formation_add') }}">
+                        <a class="nav-link {{ match('(formation|session)', app.request.uri) ? "active" : ""  }}" 
+                        href="{{ path('formation_list') }}">
                             Formations
                         </a>
-                        <a class="nav-link {{ match('session', app.request.uri) ? "active" : ""  }}" href="{{ path('session_add') }}">
-                            Sessions
+                        
+                        <a class="nav-link {{ match('stagiaire', app.request.uri) ? "active" : ""  }}" 
+                        href="{{ path('stagiaire_list') }}">
+                            Stagiaires
                         </a>
                     {% endif %}
                     
@@ -22,13 +25,9 @@
                     </a>
                 </div>
                 <div class="nav-right">
-                    {% if app.user %}
-                        <a class="nav-link logout-link" href="{{ path('app_logout') }}">
-                            Déconnexion
-                        </a>
-                    {% else %}
-                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
-                    {% endif %}
+                    <a class="nav-link logout-link" href="{{ path('app_logout') }}">
+                        Déconnexion
+                    </a>
                 </div>
             </nav>
             <nav id="sub-menu">

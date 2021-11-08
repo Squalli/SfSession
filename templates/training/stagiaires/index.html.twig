@@ -1,0 +1,9 @@
+{% extends 'training/base.html.twig' %}
+
+{% block title %}Liste stagiaires{% endblock %}
+
+{% block body %}
+    {% for stagiaire in stagiaires %}
+        <p>{{ stagiaire.firstName }} {{ stagiaire.lastName }}</p>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block submenu %}
+    <ul>
+        <li class="{{ app.request.attributes.get('_route') == "stagiaire_list" ? "active" : "" }}">
+            <a href="{{ path('stagiaire_list') }}" >Liste</a>
+        </li>
+        <li class="{{ app.request.attributes.get('_route') == "stagiaire_add" ? "active" : "" }}">
+            <a href="">Ajouter un stagiaire</a>
+        </li>
+        
+    </ul>
+{% endblock %}

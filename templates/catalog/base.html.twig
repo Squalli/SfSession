@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block submenu %}
+    {% set route = app.request.attributes.get('_route') %}
+    <ul>
+        <li class="{{ match('(list|show)', route) ? "active" : "" }}">
+            <a href="{{ path('formation_list') }}" >Liste</a>
+        </li>
+        <li class="{{ match('(formation_add)', route) ? "active" : "" }}">
+            <a href="{{ path('formation_add') }}">Ajouter une formation</a>
+        </li>
+        <li class="{{ match('(session_add)', route) ? "active" : "" }}">
+            <a href="{{ path('session_add') }}">Ajouter une session</a>
+        </li>
+        
+    </ul>
+{% endblock %}

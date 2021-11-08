@@ -11,8 +11,12 @@ body, button{
     font-family: 'Oxygen', sans-serif;
 }
 a{
-    color: inherit; 
+    color: #3071a9; 
     text-decoration: none;
+}
+
+nav a{
+    color: inherit;
 }
 
 nav#main-menu{
@@ -28,7 +32,7 @@ nav#main-menu{
 }
 nav#sub-menu ul{
     border-top: 4px solid rgb(122, 180, 197);
-    padding: 0;
+    padding: 0 1em;
     margin: 0;
     list-style: none;
     background: rgb(122, 180, 197);
@@ -52,7 +56,7 @@ nav#sub-menu ul li.active{
 #body-wrapper{
     max-width: 1200px;
     margin: auto;
-    padding: 1em;
+    padding: 2em;
 }
 
 h1{
@@ -74,7 +78,7 @@ h1{
 }
 .nav-link{
     display: inline-block;
-    padding: 1em 0;
+    padding: 1em;
     text-align: center;
 }
 .nav-left .nav-link{
@@ -100,8 +104,9 @@ h1{
     color: #fff;
 }
 
-.form{
-    max-width: 75vw;
+.small-form{
+    min-width: 360px;
+    max-width: 50vw;
     margin: auto;
 }
 .form__row2{
@@ -143,8 +148,9 @@ h1{
     }
 }
 .form label, 
-.form input[type='text'], .form input[type='number'], .form input[type='email'], .form input[type='password'],
-.form select{
+.form input[type='text'], .form input[type='number'], 
+.form input[type='email'], .form input[type='password'],
+.form input[type='date'], .form select{
     padding: 0.5em 0.2em;
     display: block;
     width: 100%;
@@ -196,6 +202,8 @@ h1{
 
 .form-btn{
     padding: 0.5em 0.8em;
+    font-size: 1.1em;
+    border-radius: 5px;
     text-transform: uppercase;
     color: #fff;
     background-color: rgb(119, 154, 187);
@@ -208,7 +216,8 @@ h1{
 
 #welcome-logo{
     margin: auto;
-    width: 15vw;
+    max-width: 15vw;
+    min-width: 120px;
     padding-top: 3em;
 }
 #welcome-logo img{
@@ -222,4 +231,47 @@ h1{
     display: inline-block;
     font-family: "Font Awesome 5 Free";
     content: "\f2f5";
+}
+
+.list{
+   
+}
+.listRow{
+    
+    margin-bottom: 1em;
+}
+.listRow__title{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.listRow__title h4{
+    flex: 1;
+}
+.listRow__title h4 small{
+    font-weight: normal;
+}
+.listRow__actions{
+    font-size: 1.2em;
+}
+.listRow__actions a{
+    margin-left: 0.5em;
+}
+.listRow__details{
+    display: none;
+    transform-origin: top;
+}
+.listRow__details.show{
+    display: block; 
+    animation: slideDown .5s forwards;
+}
+@keyframes slideDown{
+    from{
+        transform: scaleY(0);
+        opacity: 0;
+    }
+    to{
+        transform: scaleY(1);
+        opacity: 1;
+    }
 }

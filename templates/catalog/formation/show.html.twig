@@ -1,6 +1,12 @@
-{% extends "catalog/formation/base.html.twig" %}
+{% extends "catalog/base.html.twig" %}
 
 {% block body %}
+    <p>
+        <a href="{{ path('formation_list') }}">
+            <i class="fas fa-arrow-left"></i>
+            Retour à la liste
+        </a>
+    </p>
 
     <h1>{{ formation.title }}</h1>
 
@@ -17,6 +23,8 @@
                     <li>{{ moduleProg.module.name }} - <small>{{ moduleProg.duration }}h</small></li>
                 {% endfor %}
             </ul>
+     
+                
         {% endfor %}
     </ul>
     <p>Durée totale de la formation : {{ totalDuration }}h</p>
